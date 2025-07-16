@@ -12,7 +12,7 @@ To exploit temporary price divergences between two correlated stocks by taking o
    Historical daily closing prices for KOTAKBANK and HDFCBANK are downloaded using the `yfinance` API.
 
 2. **Spread Calculation**  
-   The spread is calculated as the difference between the two stock prices after normalizing or aligning them as needed.
+   The spread is calculated as the difference between the two stock prices after aligning them.
 
 3. **Mean Reversion Logic**  
    - A rolling moving average and rolling standard deviation of the spread are calculated over a defined window (e.g., 30 days).
@@ -21,10 +21,14 @@ To exploit temporary price divergences between two correlated stocks by taking o
    - A short position is initiated when the spread exceeds the upper band and exited when it reverts to the mean.
 
 4. **Signal Generation and Position Tracking**  
-   The notebook generates binary signals for entering/exiting long and short positions, and maintains a combined position column based on the strategy.
+   The notebook generates binary signals for entering/exiting long and short positions and maintains a combined position column based on the strategy.
 
 5. **Performance Metrics**  
    The strategy is evaluated using key metrics such as cumulative returns, Sharpe ratio, and maximum drawdown.
+
+## Important Note on Data Source
+
+This project uses the `yfinance` library to fetch historical stock data from Yahoo Finance. Occasionally, Yahoo Finance may temporarily block requests from your IP due to rate limiting. If you face repeated download failures, it is recommended to run this notebook on **Google Colab**, which typically avoids these issues by using a fresh server-side IP.
 
 ## Technologies Used
 
@@ -37,4 +41,12 @@ To exploit temporary price divergences between two correlated stocks by taking o
 ## How to Use
 
 1. Clone the repository or download the notebook file.
-2. Install required libraries mentioned in requirements section.
+2. Install required libraries [yfinance==0.2.54 , pandas , numpy , matplotlib].
+3. Run the Jupyter Notebook `pair_trading.ipynb` in your preferred environment (Jupyter Lab, VS Code, or Google Colab).
+4. Review the plots and performance metrics at the end of the notebook.
+
+## Notes
+
+- The strategy assumes no transaction costs or slippage.
+- It is intended for educational purposes and should not be considered financial advice.
+
